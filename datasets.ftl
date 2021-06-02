@@ -1,5 +1,6 @@
 <!-- Macros -->
 <#include "libs/header.ftl">
+<#include "models/datasets.ftl">
 
 <!-- Template variables -->
 <#if !type??>
@@ -83,19 +84,11 @@
                     <div class="table-responsive">
                       <table id="${title}" class="table table-bordered table-striped">
                         <thead>
-                        <tr>
-                          <th><@message "acronym"/></th>
-                          <th><@message "name"/></th>
-                          <th><@message "description"/></th>
-                        </tr>
+                        <@datasetTableHeadModel/>
                         </thead>
                         <tbody>
                         <#list datasets as ds>
-                          <tr>
-                            <td><a href="${contextPath}/dataset/${ds.id}">${localize(ds.acronym)}</a></td>
-                            <td><small>${localize(ds.name)}</small></td>
-                            <td class="marked"><small>${localize(ds.description)?trim?truncate_w(100, "...")}</small></td>
-                          </tr>
+                          <@datasetTableRowModel dataset=ds/>
                         </#list>
                         </tbody>
                       </table>
@@ -108,29 +101,7 @@
                     <#list datasets as ds>
                       <div class="border-bottom mb-3 pb-3" style="min-height: 150px;">
                         <div class="row">
-                          <div class="col-lg-3 col-sm-12">
-                            <#if ds.class.simpleName == "HarmonizationDataset">
-                              <div class="text-black-50 text-center mt-5">
-                                  <i class="${harmoDatasetIcon} fa-3x"></i>
-                              </div>
-                            <#else>
-                              <div class="text-black-50 text-center mt-4">
-                                  <i class="${datasetIcon} fa-3x"></i>
-                              </div>
-                            </#if>
-                          </div>
-                          <div class="col-lg-9 col-sm-12">
-                            <h2 class="lead"><b>${localize(ds.acronym)}</b></h2>
-                            <p class="text-muted text-sm">${localize(ds.name)}</p>
-                            <div class="marked">
-                              ${localize(ds.description)?trim?truncate_w(200, "...")}
-                            </div>
-                            <div class="mt-2">
-                              <a href="${contextPath}/dataset/${ds.id}" class="btn btn-sm btn-outline-info">
-                                <@message "global.read-more"/>
-                              </a>
-                            </div>
-                          </div>
+                          <@datasetLineModel dataset=ds/>
                         </div>
                       </div>
                     </#list>
@@ -139,40 +110,7 @@
 
                 <#if datasetListDisplays?seq_contains("cards")>
                   <div class="tab-pane <#if datasetListDefaultDisplay == "cards">active</#if>" id="cards">
-                    <div class="row d-flex align-items-stretch">
-                      <#list datasets as ds>
-                        <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-                          <div class="card bg-light w-100">
-                            <div class="card-header text-dark border-bottom-0">
-                              <h2 class="lead"><b>${localize(ds.acronym)}</b></h2>
-                            </div>
-                            <div class="card-body pt-0">
-                              <div class="row">
-                                <div class="col-7">
-                                  <p class="text-muted text-sm">${localize(ds.name)}</p>
-                                </div>
-                                <div class="col-5 text-center">
-                                  <p class="text-black-50 text-center mr-5 ml-5 pr-5">
-                                    <#if ds.class.simpleName == "HarmonizationDataset">
-                                      <i class="${harmoDatasetIcon} fa-3x"></i>
-                                    <#else>
-                                      <i class="${datasetIcon} fa-3x"></i>
-                                    </#if>
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="card-footer">
-                              <div class="text-right">
-                                <a href="${contextPath}/dataset/${ds.id}" class="btn btn-sm btn-outline-info">
-                                  <i class="fas fa-eye"></i> <@message "global.read-more"/>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </#list>
-                    </div>
+                    <@datasetCardModel/>
                   </div>
                 </#if>
 
@@ -208,6 +146,7 @@
 <!-- ./wrapper -->
 
 <#include "libs/scripts.ftl">
+<#include "libs/datasets-scripts.ftl">
 <script>
     $(function () {
         $("#${title}").DataTable(dataTablesDefaultOpts);

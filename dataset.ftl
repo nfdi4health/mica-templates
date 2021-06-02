@@ -3,6 +3,7 @@
 <#include "models/population.ftl">
 <#include "models/dce.ftl">
 <#include "models/dataset.ftl">
+<#include "models/harmonization.ftl">
 <#include "models/files.ftl">
 
 <!DOCTYPE html>

@@ -3,6 +3,7 @@
 <#include "models/variable.ftl">
 <#include "models/population.ftl">
 <#include "models/dce.ftl">
+<#include "models/harmonization.ftl">
 <#include "models/files.ftl">
 
 <#if type == "Harmonized">
@@ -37,6 +38,17 @@
     <!-- Main content -->
     <div class="content">
       <div class="container">
+        <div class="callout callout-info">
+          <#if variable.attributes?? && variable.attributes.label??>
+            <p class="marked"><template>${localize(variable.attributes.label)}</template></p>
+          <#else>
+            <p class="text-muted"><@message "no-label"/></p>
+          </#if>
+          <#if variable.attributes?? && variable.attributes.description??>
+            <p class="marked text-muted"><template><i class="fas fa-info-circle"></i> ${localize(variable.attributes.description)}</template></p>
+          </#if>
+        </div>
+
         <div class="row">
           <div class="col-xs-12 col-lg-6">
             <div class="card card-info card-outline">
@@ -140,18 +152,30 @@
                   </dd>
 
                   <dt class="col-sm-4"><@message "study"/></dt>
-                  <dd class="col-sm-8"><a href="${contextPath}/study/${study.id}">${localize(study.acronym, study.id)}</a></dd>
+                  <#if studyPublished>
+                    <dd class="col-sm-8"><a href="${contextPath}/study/${study.id}">${localize(study.acronym, study.id)}</a></dd>
+                  <#else>
+                    <dd class="col-sm-8">${localize(study.acronym)}</dd>
+                  </#if>
                   <dt class="col-sm-4"><@message "population"/></dt>
                   <dd class="col-sm-8">
-                    <a href="#" data-toggle="modal" data-target="#modal-${population.id}">${localize(population.name, population.id)}</a>
-                    <@populationDialog id=population.id population=population></@populationDialog>
+                    <#if studyPublished>
+                      <a href="#" data-toggle="modal" data-target="#modal-${population.id}">${localize(population.name, population.id)}</a>
+                      <@populationDialog id=population.id population=population></@populationDialog>
+                    <#else>
+                      ${localize(population.name, population.id)}
+                    </#if>
                   </dd>
                   <#if dce??>
                     <dt class="col-sm-4"><@message "data-collection-event"/></dt>
                     <dd class="col-sm-8">
+                      <#if studyPublished>
                       <#assign dceId="${population.id}-${dce.id}">
                       <a href="#" data-toggle="modal" data-target="#modal-${dceId}">${localize(dce.name, dce.id)}</a>
                       <@dceDialog id=dceId dce=dce></@dceDialog>
+                      <#else>
+                        ${localize(dce.name, dce.id)}
+                      </#if>
                     </dd>
                   </#if>
                   <#if type == "Harmonized">
@@ -190,7 +214,7 @@
                         ${localize(annotation.vocabularyTitle)}
                       </dt>
                       <dd class="col-sm-8" title="<#if annotation.termDescription??>${localize(annotation.termDescription)}</#if>">
-                        <template><span class="marked">${localize(annotation.termTitle)}</span></template>
+                        <span class="marked"><template>${localize(annotation.termTitle)}</template></span>
                       </dd>
                     </#list>
                   </dl>
@@ -234,7 +258,7 @@
                           ${localize(harmoAnnotations.algorithmTitle, "Algorithm")}
                         </dt>
                         <dd>
-                          <span class="marked mt-3"><template>${harmoAnnotations.algorithmValue!""}</template></span>
+                          <span class="marked mt-3"><template>${localize(harmoAnnotations.algorithmValue!"")}</template></span>
                         </dd>
                       </#if>
 
@@ -243,7 +267,7 @@
                           ${localize(harmoAnnotations.commentTitle, "Comment")}
                         </dt>
                         <dd>
-                          <span class="marked"><template>${harmoAnnotations.commentValue!""}</template></span>
+                          <span class="marked"><template>${localize(harmoAnnotations.commentValue!"")}</template></span>
                         </dd>
                       </#if>
                     </dl>
@@ -253,6 +277,70 @@
             </#if>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-info card-outline">
+              <div class="card-header">
+                <h3 class="card-title"><@message "summary-statistics"/></h3>
+                <#if showDatasetContingencyLink>
+                  <#if variable.nature == "CATEGORICAL">
+                    <a class="btn btn-primary float-right" href="${contextPath}/dataset-crosstab/${variable.datasetId}?var1=${variable.name}">
+                      <i class="fas fa-cog"></i> <@message "dataset.crosstab.title"/>
+                    </a>
+                  <#elseif variable.nature == "CONTINUOUS">
+                    <a class="btn btn-primary float-right" href="${contextPath}/dataset-crosstab/${variable.datasetId}?var2=${variable.name}">
+                      <i class="fas fa-cog"></i> <@message "dataset.crosstab.title"/>
+                    </a>
+                  </#if>
+                </#if>
+              </div>
+              <div class="card-body">
+                <#if user?? || !config.variableSummaryRequiresAuthentication>
+                  <@variableSummary variable=variable/>
+                <#else>
+                  <@message "sign-in-for-variable-statistics"/>
+                  <a href="${contextPath}/signin?redirect=${contextPath}/variable/${variable.id}" class="btn btn-info"><@message "sign-in"/></a>
+                </#if>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <#if type == "Dataschema">
+          <div class="row">
+            <div class="col-12">
+              <div class="card card-info card-outline">
+                <div class="card-header">
+                  <h3 class="card-title"><@message "harmonized-variables"/></h3>
+                </div>
+                <div class="card-body">
+                  <@harmonizationLegend/>
+                  <div id="loadingHarmonizedVariables" class="spinner-border spinner-border-sm" role="status"></div>
+                  <div class="table-responsive">
+                    <table id="harmonizedVariables" class="table table-striped" style="display: none">
+                      <thead>
+                        <tr>
+                          <th><@message "variable"/></th>
+                          <th><@message "study"/></th>
+                          <th><@message "data-collection-event"/></th>
+                          <th><@message "status"/></th>
+                          <th><@message "status-detail"/></th>
+                          <th><@message "comment"/></th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                  <div id="noHarmonizedVariables" style="display: none">
+                    <span class="text-muted"><@message "no-harmonized-variables"/></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </#if>
+
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
