@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="card-text marked mt-3">
-                  ${localize(dataset.description)}
+                  <template>${localize(dataset.description)}</template>
                 </div>
               </div>
                 <#if study??>

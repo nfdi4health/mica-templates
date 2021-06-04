@@ -147,10 +147,6 @@
 
 <#include "libs/scripts.ftl">
 <#include "libs/datasets-scripts.ftl">
-<script>
-    $(function () {
-        $("#${title}").DataTable(dataTablesDefaultOpts);
-    });
-</script>
+
 </body>
 </html>
