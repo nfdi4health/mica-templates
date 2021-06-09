@@ -37,7 +37,7 @@
     <div class="content">
       <div class="container">
         <div id="${title}-callout" class="callout callout-info">
-          <p>Below is a list of studies and resources related to COVID-19, which contain survey items and item banks. 
+          <p>Below is a list of studies and resources related to COVID-19, which contain survey items and item banks.
 More COVID-19 studies without semantic annotation of survey items can be accessed through: <a href="http://covid19.studyhub.nfdi4health.de" target="_blank">http://covid19.studyhub.nfdi4health.de/</a>.</p>
         </div>
 
@@ -139,10 +139,6 @@ More COVID-19 studies without semantic annotation of survey items can be accesse
 
 <#include "libs/scripts.ftl">
 <#include "libs/studies-scripts.ftl">
-<script>
-    $(function () {
-        $("#${title}").DataTable(dataTablesDefaultOpts);
-    });
-</script>
+
 </body>
 </html>

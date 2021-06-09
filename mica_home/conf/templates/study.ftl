@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="card-text marked mt-3">
-                  <p>${localize(study.objectives)}</p>
+                  <template>${localize(study.objectives)}</template>
                 </div>
 
                 <!-- Study definition model -->
