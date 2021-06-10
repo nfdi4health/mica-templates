@@ -36,6 +36,15 @@
 
       </div><!-- /.container-fluid -->
     </div>
+    
+    <h1>Acknowledgements</h1>
+    <div class="acknowledgements">
+    	This work was done as part of the NFDI4Health Task Force COVID-19
+      (www.nfdi4health.de/task-force-covid-19-2). We gratefully acknowledge the financial
+      support of the German Research Foundation (DFG) – Project Number 451265285, PI
+      345/17-1/SCHM 2744/9-1, and from the Klaus Tschira Foundation.
+    </div>
+    
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
