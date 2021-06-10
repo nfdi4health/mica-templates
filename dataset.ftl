@@ -3,6 +3,7 @@
 <#include "models/population.ftl">
 <#include "models/dce.ftl">
 <#include "models/dataset.ftl">
+<#include "models/harmonization.ftl">
 <#include "models/files.ftl">
 
 <!DOCTYPE html>
@@ -89,7 +90,7 @@
                 </div>
 
                 <div class="card-text marked mt-3">
-                  ${localize(dataset.description)}
+                  <template>${localize(dataset.description)}</template>
                 </div>
               </div>
                 <#if study??>
