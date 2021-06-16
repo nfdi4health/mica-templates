@@ -20,7 +20,7 @@
   <div class="content-wrapper">
 
     <div class="modal fade modalImpressum" tabindex="-1" role="dialog" aria-labelledby="modalImpressumLabel" aria-hidden="true">
-      <div class="modal-dialog" style="max-width: 100% !important" role="document">
+      <div class="modal-dialog" style="max-width: 1100px !important" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalImpressumLabel">Impressum / Legal Notice</h5>
