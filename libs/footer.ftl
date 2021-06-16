@@ -11,7 +11,10 @@
   <small>
     <@message "powered-by"/> <a href="https://www.obiba.org">OBiBa Mica</a>
     <div class="d-sm-inline border-left pl-2 ml-2">
-      <button type="button" class="btn btn-link" data-toggle="modal" data-target=".modalImpressum">Impressum / Legal Notice</button>
+      <a href="#" data-toggle="modal" data-target=".modalImpressum">Impressum / Legal Notice</a>
+    </div>
+    <div class="d-sm-inline border-left pl-2 ml-2">
+      <button type="button" class="btn btn-link" style="font-size: small; padding: 0px" data-toggle="modal" data-target=".modalImpressum">Impressum / Legal Notice</button>
     </div>
     
   </small>
