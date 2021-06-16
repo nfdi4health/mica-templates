@@ -130,7 +130,7 @@
 							    <#if dataset.model.license??>
 							      <p>${dataset.model.license}</p>
 							    <#else>
-							      <p style="color: red">Error: did not find dataset.model.license - did you update the templates in MICA administration?</p>
+							      <p style="color: red">Error: did not find dataset.model.license - did you update the Harmonized Dataset Configuration in MICA administration?</p>
 							    </#if>
 							  </div>
 							</div>
