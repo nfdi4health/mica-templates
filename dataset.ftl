@@ -118,6 +118,26 @@
           </div>
         </div>
 
+				<!-- License -->
+				<div class="row">
+          <div class="col-lg-12">
+            <div class="card card-info card-outline">
+              <div class="card-header">
+                <h3 class="card-title">License</h3>
+							</div>
+							<div class="card-body">
+							  <div class="card-text marked mt-3">
+							    <#if dataset.model.license??>
+							      <p>${dataset.model.license}</p>
+							    <#else>
+							      <p style="color: red">Error: did not find dataset.model.license - did you update the templates in MICA administration?</p>
+							    </#if>
+							  </div>
+							</div>
+					  </div>
+					</div>
+			  </div>
+
         <!-- Dataset model -->
         <@datasetModel dataset=dataset type=type/>
 
