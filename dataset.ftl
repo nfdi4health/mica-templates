@@ -126,11 +126,11 @@
                 <h3 class="card-title">License</h3>
 							</div>
 							<div class="card-body">
-							  <div class="card-text marked mt-3">
+							  <div class="card-text">
 							    <#if dataset.model.license??>
 							      <p>${dataset.model.license}</p>
 							    <#else>
-							      <p style="color: red">Error: did not find dataset.model.license - did you update the Harmonized Dataset Configuration in MICA administration?</p>
+							      <p style="color: red">Error: did not find dataset.model.license - did you update the Harmonized Dataset Configuration in MICA administration and republish this instrument?</p>
 							    </#if>
 							  </div>
 							</div>
