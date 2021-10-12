@@ -21,7 +21,7 @@
 <#assign assetsPath = "${contextPath}/assets"/>
 
 <!-- Branding -->
-<#assign brandImageSrc = "${assetsPath}/templates/NFDI4Health_Logo_cmyk_RZ.png"/>
+<#assign brandImageSrc = "${assetsPath}/NFDI4Health_Logo_cmyk_RZ.png"/>
 <#assign brandImageClass = "img-circle elevation-3"/>
 <#assign brandTextEnabled = true/>
 <#assign brandTextClass = "font-weight-light"/>
