@@ -3,12 +3,12 @@
   <div class="container">
     <#if config??>
     	<a href="https://www.nfdi4health.de/task-force-covid-19-2/" target="#">
-      	<img src="https://www.nfdi4health.de/wp-content/uploads/2020/11/NFDI4Health-Task-Force_Logo_cmyk.png"
+      	<img src="${assetsPath}/NFDI4Health_Logo_cmyk_RZ.png"
            alt="Logo"
            height="40px">
     	</a>
     <#else>
-      	<img src="https://www.nfdi4health.de/wp-content/uploads/2020/11/NFDI4Health-Task-Force_Logo_cmyk.png"
+      	<img src="${assetsPath}/NFDI4Health_Logo_cmyk_RZ.png"
            alt="Logo"
            height="40px">
     </#if>
