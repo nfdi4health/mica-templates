@@ -3,14 +3,10 @@
   <div class="container">
     <#if config??>
     	<a href="https://www.nfdi4health.de/task-force-covid-19-2/" target="#">
-      	<img src="${assetsPath}/NFDI4Health_Logo_cmyk_RZ.png"
-           alt="Logo"
-           height="40px">
+      	<img src="${brandImageSrc}" alt="Logo" height="40px">
     	</a>
     <#else>
-      	<img src="${assetsPath}/NFDI4Health_Logo_cmyk_RZ.png"
-           alt="Logo"
-           height="40px">
+      	<img src="${brandImageSrc}" alt="Logo" height="40px">
     </#if>
 
     <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
