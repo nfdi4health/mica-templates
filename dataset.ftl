@@ -99,7 +99,12 @@
                     <a class="btn btn-success ml-2" href="${contextPath}/study/${study.id}">
                       <i class="${studyIcon}"></i> ${localize(study.acronym)}
                     </a>
-                    <#if cartEnabled>
+                    <#if showDatasetContingencyLink>
+                      <a class="btn btn-primary float-right ml-2" href="${contextPath}/dataset-crosstab/${dataset.id}">
+                        <i class="fas fa-cog"></i> <@message "dataset.crosstab.title"/>
+                      </a>
+                    </#if>
+                    <#if cartEnabled && variablesCartEnabled>
                       <div id="cart-add" class="float-right">
                         <#if user??>
                           <button type="button" class="btn btn-link" onclick="onVariablesCartAdd('${dataset.id}')">
