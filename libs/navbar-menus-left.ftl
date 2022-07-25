@@ -20,11 +20,11 @@
             <#if config.singleStudyEnabled>
               <a href="${contextPath}/study/_" class="dropdown-item"><@message "the-study"/></a>
             <#else>
-              <a href="${contextPath}/studies" class="dropdown-item"><@message "studies"/></a>
+              <a href="${contextPath}/harmonization-studies" class="dropdown-item"><@message "studies"/></a>
             </#if>
           </li>
           <#if config.studyDatasetEnabled || config.harmonizationDatasetEnabled>
-            <li><a href="${contextPath}/datasets" class="dropdown-item"><@message "datasets"/></a></li>
+            <li><a href="${contextPath}/harmonized-datasets" class="dropdown-item"><@message "datasets"/></a></li>
           </#if>
         </ul>
       </li>
